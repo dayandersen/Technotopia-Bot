@@ -24,6 +24,13 @@ const TEST_COMMAND = {
   type: 1,
 };
 
+// Simple test command
+const PROBLEM_OF_THE_DAY_COMMAND = {
+  name: 'get-problem-of-day',
+  description: 'Returns the LC problem of the day',
+  type: 1,
+};
+
 // Command containing options
 const CHALLENGE_COMMAND = {
   name: 'challenge',
@@ -40,6 +47,6 @@ const CHALLENGE_COMMAND = {
   type: 1,
 };
 
-const ALL_COMMANDS = [TEST_COMMAND, CHALLENGE_COMMAND];
+const ALL_COMMANDS = [TEST_COMMAND, CHALLENGE_COMMAND, PROBLEM_OF_THE_DAY_COMMAND];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);

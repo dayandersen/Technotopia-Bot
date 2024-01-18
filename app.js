@@ -8,7 +8,7 @@ import {
   ButtonStyleTypes,
 } from 'discord-interactions';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
-import { getShuffledOptions, getResult } from './game.js';
+import { getProblemOfTheDay } from './problemOfTheDay.js';
 
 // Create an express app
 const app = express();
@@ -51,6 +51,16 @@ app.post('/interactions', async function (req, res) {
           content: 'hello world ' + getRandomEmoji(),
         },
       });
+    }
+    else if (name === "getProblemOfTheDay") {
+      // Send a message into the channel where command was triggered from
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          // Fetches a random emoji to send from a helper function
+          content: getProblemOfTheDay()
+        },
+      }); 
     }
   }
 });
