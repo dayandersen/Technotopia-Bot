@@ -3,7 +3,7 @@
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = "technotopia-bot-misty-night-7702"
+app = "technotopia-bot"
 primary_region = "ord"
 
 [build]
@@ -30,8 +30,3 @@ primary_region = "ord"
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
-
-[[vm]]
-  cpu_kind = "shared"
-  cpus = 1
-  memory_mb = 256
