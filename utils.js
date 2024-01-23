@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import { verifyKey } from 'discord-interactions';
+import cron from 'node-cron';
 
 export function VerifyDiscordRequest(clientKey) {
   return function (req, res, buf, encoding) {
@@ -60,4 +61,11 @@ export function getRandomEmoji() {
 
 export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
+export function startCronJob(func) {
+  cron.schedule('0 0 * * *', async () => {
+    console.log(`Invoking function ${func.name}`)
+    func()
+  });
 }

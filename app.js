@@ -4,8 +4,10 @@ import {
   InteractionType,
   InteractionResponseType,
 } from 'discord-interactions';
-import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
+import { VerifyDiscordRequest, getRandomEmoji, startCronJob } from './utils.js';
 import { getProblemOfTheDay } from './problemOfTheDay.js';
+import { publishLcDailyChallenge} from './publishLcData.js'
+
 
 // Create an express app
 const app = express();
@@ -69,6 +71,9 @@ app.post('/interactions', async function (req, res) {
     }
   }
 });
+
+publishLcDailyChallenge()
+startCronJob(publishLcDailyChallenge)
 
 app.listen(PORT, () => {
   console.log('Listening on port', PORT);
