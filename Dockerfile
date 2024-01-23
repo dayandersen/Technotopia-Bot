@@ -19,8 +19,7 @@ FROM base as build
 # Install packages needed to build node modules
 RUN apt-get update -qq && \
     apt-get install -y python-is-python3 pkg-config build-essential && \
-    apt-get -y install curl \
-    apt-get -y install nodejs
+    apt-get -y install curl 
 
 # Install node modules
 COPY --link package.json .
