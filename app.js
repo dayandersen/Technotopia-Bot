@@ -40,7 +40,13 @@ app.post('/interactions', async function (req, res) {
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
+<<<<<<< Updated upstream
     console.log(`Incoming request for ${name} command`)
+=======
+
+
+    console.log(`Request name was: ${name}`)
+>>>>>>> Stashed changes
     // "test" command
     if (name === 'test') {
       // Send a message into the channel where command was triggered from
@@ -52,13 +58,21 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
-    else if (name === "getProblemOfTheDay") {
+    else if (name === "get-problem-of-day") {
+      console.log("LC getter started")
       // Send a message into the channel where command was triggered from
+      var lcProblemResponse = {data: {activeDailyCodingChallengeQuestion: {link: ""}}}
+      await getProblemOfTheDay()
+      .then(response => {lcProblemResponse = response; console.log(response)})
+      .catch(error => console.error(error));
+      lcProblemResponse = JSON.parse(lcProblemResponse)
+      console.log(typeof(lcProblemResponse))
+      console.log(`Got ${lcProblemResponse["data"]}`)
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          // Fetches a random emoji to send from a helper function
-          content: getProblemOfTheDay()
+          // Fetches today's LC problem of the day
+          content:"Problem of the day is: " + "https://leetcode.com" + lcProblemResponse["data"]["activeDailyCodingChallengeQuestion"]["link"]
         },
       }); 
     }

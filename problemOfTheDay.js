@@ -1,7 +1,6 @@
-export function getProblemOfTheDay() {
-    const https = require('https');
+import https from 'https';
 
-    const csrfToken = 'wBQw3cRfDaU0dXrFRhkPFX2d0N1lUXq4IjQ1LCqQxM1VwGYOwHiqKXrgmXnlAAxf';
+const csrfToken = 'wBQw3cRfDaU0dXrFRhkPFX2d0N1lUXq4IjQ1LCqQxM1VwGYOwHiqKXrgmXnlAAxf';
     
     const data = JSON.stringify({
       query: `
@@ -47,24 +46,27 @@ export function getProblemOfTheDay() {
         'X-CSRFToken': csrfToken  // Including CSRF token in the request headers
       }
     };
-    let responseBody = '';
-    const req = https.request(options, (res) => {
-    
-      res.on('data', (chunk) => {
-        responseBody += chunk;
+
+export async function getProblemOfTheDay() {    
+    return new Promise((resolve, reject) => {
+      const req = https.request(options, (res) => {
+        let responseBody = '';
+  
+        res.on('data', (chunk) => {
+          responseBody += chunk;
+        });
+  
+        res.on('end', () => {
+          resolve(responseBody);
+        });
       });
-    
-      res.on('end', () => {
-        console.log(responseBody);
+  
+      req.on('error', (e) => {
+        reject(`Problem with request: ${e.message}`);
       });
+  
+      // Write data to request body and end the request
+      req.write(data);
+      req.end();
     });
-    
-    req.on('error', (e) => {
-      console.error(`Problem with request: ${e.message}`);
-    });
-    
-    // Write data to request body
-    req.write(data);
-    req.end();
-    return responseBody
 }
