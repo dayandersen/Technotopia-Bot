@@ -30,8 +30,4 @@ primary_region = "ord"
   [[services.ports]]
     handlers = ["tls", "http"]
     port = 443
-<<<<<<< Updated upstream
-=======
 
-
->>>>>>> Stashed changes

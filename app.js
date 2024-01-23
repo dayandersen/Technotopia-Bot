@@ -3,9 +3,6 @@ import express from 'express';
 import {
   InteractionType,
   InteractionResponseType,
-  InteractionResponseFlags,
-  MessageComponentTypes,
-  ButtonStyleTypes,
 } from 'discord-interactions';
 import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
 import { getProblemOfTheDay } from './problemOfTheDay.js';
@@ -40,13 +37,7 @@ app.post('/interactions', async function (req, res) {
    */
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
-<<<<<<< Updated upstream
     console.log(`Incoming request for ${name} command`)
-=======
-
-
-    console.log(`Request name was: ${name}`)
->>>>>>> Stashed changes
     // "test" command
     if (name === 'test') {
       // Send a message into the channel where command was triggered from

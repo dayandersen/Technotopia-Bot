@@ -4,7 +4,7 @@ import { verifyKey } from 'discord-interactions';
 
 export function VerifyDiscordRequest(clientKey) {
   return function (req, res, buf, encoding) {
-    return true
+    // return true
     const signature = req.get('X-Signature-Ed25519');
     const timestamp = req.get('X-Signature-Timestamp');
 
