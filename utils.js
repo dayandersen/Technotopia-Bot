@@ -64,6 +64,7 @@ export function capitalize(str) {
 }
 
 export function startCronJob(func) {
+  console.log(`Cron invoked for ${func.name}`)
   cron.schedule('0 0 * * *', async () => {
     console.log(`Invoking function ${func.name}`)
     func()

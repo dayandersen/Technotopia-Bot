@@ -19,7 +19,8 @@ export async function publishLcDailyChallenge() {
     .catch(error => console.error(error));
     lcProblemResponse = JSON.parse(lcProblemResponse)
     if(channel) {
-        const content = "Problem of the day is: " + "https://leetcode.com" + lcProblemResponse["data"]["activeDailyCodingChallengeQuestion"]["link"]
+        const userId = "134893238929719296"
+        const content = `Howdy, <@${userId}> problem of the day is: https://leetcode.com${lcProblemResponse["data"]["activeDailyCodingChallengeQuestion"]["link"]}`
         channel.send(content);
     }
 }
